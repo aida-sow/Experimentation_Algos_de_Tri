@@ -17,7 +17,9 @@ void TriBulle (int n, int T[]) {
 
 int main () {
     srand (time(NULL));
-    int n = 10;
+    int n;
+    printf ("Taille du tableau : ");
+    scanf ("%d", &n);
     int tab[n], i;
     clock_t debut, fin;
     double temps;
