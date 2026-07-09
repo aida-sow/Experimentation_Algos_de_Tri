@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include <stdio.h> /*bibliotheque standard contenant les fonctions de base*/
+#include <stdlib.h> /*C'est la bibliotheque contenant les fonctions srand et rand*/
+#include <time.h> /*bibliotheque contenant les outils neccessaires pour mesurer le temps d'execution*/
 
 void TriBulle (int n, int T[]) {
     int i, j, temp;
@@ -13,17 +13,18 @@ void TriBulle (int n, int T[]) {
             }
         }
     }
-}
+} /*Procedure du tri a bulle*/
 
 int main () {
     srand (time(NULL));
-    int tab[10000], i;
+    int n = 10;
+    int tab[n], i;
     clock_t debut, fin;
     double temps;
-    for (i = 0; i < 10000; i++) 
-        tab [i] = rand() % 10000;
+    for (i = 0; i < n; i++) 
+        tab [i] = rand() % n;
     debut = clock();
-    TriBulle (10000, tab);
+    TriBulle (n, tab);
     fin = clock();
     temps = (double)(fin - debut) / CLOCKS_PER_SEC;
     printf("Temps d'execution : %f secondes\n", temps);
