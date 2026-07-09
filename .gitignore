@@ -1,1 +1,5 @@
+# fichiers executables
 *.exe
+
+# dossier agent (Codex)
+/.agents
