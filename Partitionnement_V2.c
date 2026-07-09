@@ -23,5 +23,5 @@ int PartitionnementV2 (int tab[], int i, int j) {
         }
     }
     Permuter (tab, i, k);
-    return k
+    return k;
 }
