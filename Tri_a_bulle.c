@@ -36,7 +36,7 @@ int main () {
 
     /* Remplissage du tableau avec des valeurs aleatoires entre 0 et n - 1. */
     for (i = 0; i < n; i++) 
-        tab [i] = rand() % n;
+        tab [i] = rand();
 
     /* Mesure du temps pris uniquement par le tri. */
     debut = clock();
