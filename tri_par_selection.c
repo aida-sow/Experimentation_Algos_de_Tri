@@ -33,18 +33,34 @@ void afficherTableau(int tab[], int n) {
     printf("\n");                   // saut de ligne à la fin de l'affichage
 }
 
-// Programme principal pour tester l'algorithme
-int main() {
-    int tab[] = {5, 2, 9, 1, 7, 3};   // exemple de tableau à trier
-    int n = 6;                        // nombre d'éléments dans le tableau
+int main () {
+    /* Initialisation du generateur de nombres aleatoires avec l'heure actuelle. */
+    srand (time(NULL));
 
-    printf("Tableau avant tri : ");
-    afficherTableau(tab, n);          // on affiche le tableau avant le tri
+    int n;
 
-    triSelection(tab, n);             // on appelle la fonction de tri
+    /* Lecture de la taille du tableau a trier. */
+    printf ("Taille du tableau : ");
+    scanf ("%d", &n);
 
-    printf("Tableau après tri : ");
-    afficherTableau(tab, n);          // on affiche le tableau après le tri
+    int tab[n], i;
+    clock_t debut, fin;
+    double temps;
 
+    /* Remplissage du tableau avec des valeurs aleatoires entre 0 et n - 1. */
+    for (i = 0; i < n; i++) 
+        tab [i] = rand() % n;
+
+    /* Mesure du temps pris uniquement par le tri. */
+    debut = clock();
+    TriBulle (n, tab);
+    fin = clock();
+
+    /* Conversion du temps processeur en secondes. */
+    temps = (double)(fin - debut) / CLOCKS_PER_SEC;
+
+    /* Affichage du temps d'execution du tri. */
+    printf("Temps d'execution : %f secondes\n", temps);
+    
     return 0;                         // fin du programme
 }

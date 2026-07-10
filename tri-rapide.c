@@ -1,0 +1,41 @@
+#include <stdio.h>
+*  Tri rapide (quick sort)
+ *
+ *  On choisit un pivot, on place a sa gauche les plus petits et a sa
+ *  droite les plus grands (partitionnement), puis on recommence sur
+ *  chaque sous-partie.
+ *  Complexite : O(n log n) en moyenne, O(n^2) au pire. En place, instable.
+ * ------------------------------------------------------------------- */
+
+/* Partitionnement (adapte de la version v1 du cours). Le pivot est le
+ * premier element de la zone [a..b]. Renvoie la position finale du pivot. */
+static int partition(int T[], int a, int b)
+{
+    int pivot = a;                  /* case courante du pivot */
+    int i;
+    for (i = a + 1; i <= b; i++) {
+        if (T[i] < T[pivot]) {
+            /* on insere T[i] juste apres le pivot puis on avance le pivot */
+            int temp = T[i];
+            T[i] = T[pivot + 1];
+            T[pivot + 1] = T[pivot];
+            T[pivot] = temp;
+            pivot = pivot + 1;
+        }
+    }
+    return pivot;
+}
+
+static void tri_rapide_rec(int T[], int deb, int fin)
+{
+    if (deb < fin) {
+        int k = partition(T, deb, fin);
+        tri_rapide_rec(T, deb, k - 1);
+        tri_rapide_rec(T, k + 1, fin);
+    }
+}
+
+void tri_rapide(int tab[], int n)
+{
+    tri_rapide_rec(tab, 0, n - 1);
+}
