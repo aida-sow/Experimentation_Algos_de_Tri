@@ -1,4 +1,5 @@
- *  Tri rapide (quick sort)
+#include <stdio.h>
+*  Tri rapide (quick sort)
  *
  *  On choisit un pivot, on place a sa gauche les plus petits et a sa
  *  droite les plus grands (partitionnement), puis on recommence sur
