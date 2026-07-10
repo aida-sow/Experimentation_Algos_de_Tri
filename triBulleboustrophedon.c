@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h> // pour malloc (allocation dynamique) et rand()
+#include <time.h>   // pour time(), sert à "varier" les nombres aléatoires à chaque exécution
 
 /*
  * Tri à bulle "boustrophédon" (ou tri cocktail).
@@ -71,11 +73,37 @@ void afficherTableau(int tab[], int n)
     printf("\n");
 }
 
+// Remplit le tableau avec des valeurs aléatoires entre 1 et 100
+void remplirAleatoirement(int tab[], int n)
+{
+    int idx;
+    for (idx = 1; idx <= n; idx++)
+    {
+        tab[idx] = rand() % 100 + 1; // rand()%100 donne 0 à 99, on ajoute 1 pour avoir 1 à 100
+    }
+}
+
 int main(void)
 {
-    // On met un élément "bidon" en tab[0] vu que le tableau commence à l'indice 1
-    int tab[] = {0, 5, 2, 9, 1, 5, 6, 3, 8, 4, 7};
-    int n = 10; // nombre d'éléments réels (sans compter tab[0])
+    int n;
+    int *tab; // le tableau, on va l'allouer une fois qu'on connait n
+
+    // On initialise le générateur aléatoire avec l'heure actuelle,
+    // sinon on aurait toujours les mêmes "nombres aléatoires" à chaque exécution
+    srand((unsigned int)time(NULL));
+
+    printf("Combien d'elements voulez-vous dans le tableau ? ");
+    scanf("%d", &n);
+
+    // On alloue n+1 cases, vu que notre tableau utilise les indices de 1 a n (tab[0] inutilise)
+    tab = (int *)malloc((n + 1) * sizeof(int));
+    if (tab == NULL) // toujours verifier que malloc n'a pas echoue (manque de memoire par exemple)
+    {
+        printf("Erreur : impossible d'allouer la memoire.\n");
+        return 1;
+    }
+
+    remplirAleatoirement(tab, n);
 
     printf("Avant le tri : ");
     afficherTableau(tab, n);
@@ -84,6 +112,8 @@ int main(void)
 
     printf("Apres le tri : ");
     afficherTableau(tab, n);
+
+    free(tab); // on libere la memoire allouee, sinon ca reste occupe pour rien
 
     return 0;
 }
